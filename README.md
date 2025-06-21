@@ -19,6 +19,54 @@ The entire system runs in the terminal without requiring any physical hardware, 
 
 -----
 
+## 🧱 System Architecture & Data Flow
+
+This project simulates a **closed-loop PID control system** for a DC motor using pure C code. It models real-world motor physics (inertia, friction), applies PID feedback control, and logs system performance — all without hardware.
+
+<p align="center">
+  <img src="images/Flow%20diagram.png" alt="PID Control System Flow Diagram" width="850"/>
+  <br/>
+  <em>PID Feedback Loop — Simulated Motor Control System</em>
+</p>
+
+
+---
+
+### 🧪 Stage 1: Motor Simulation
+
+- **Motor Model**: Models real DC motor dynamics using simplified physics  
+  - Parameters: inertia, friction, torque-to-speed behavior  
+- **Target Setpoint**: A desired speed is set in `main.c` for the motor to reach
+
+
+
+### 🔁 Stage 2: PID Controller
+
+A classic **PID feedback loop** continuously calculates error and applies corrections:
+
+```c
+control_signal = Kp * error + Ki * integral + Kd * derivative;
+````
+
+* **`Kp`**: Proportional gain — reacts to current error
+* **`Ki`**: Integral gain — eliminates steady-state error
+* **`Kd`**: Derivative gain — dampens overshoot
+
+
+
+### 📊 Stage 3: Output & Logging
+
+* **🖥️ Console Output**
+
+  * Prints target speed, current speed, error, and control signal in real-time
+
+* **📁 `log.csv` Logging**
+
+  * Stores every cycle's values: target, actual speed, error, and output
+  * Enables plotting of performance curves using Python or Excel
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
